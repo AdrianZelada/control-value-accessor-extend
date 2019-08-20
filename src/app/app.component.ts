@@ -1,10 +1,29 @@
 import { Component } from '@angular/core';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass']
 })
+
 export class AppComponent {
   title = 'control-value-accesor-extend';
+
+  form: FormGroup;
+
+  options: Array<string> = ['Adrian', 'Chicho', 'Ceci'];
+  constructor(private fb: FormBuilder) {
+
+    this.form = this.fb.group({
+      name: new FormControl(''),
+      control:  new FormControl('')
+    });
+
+    this.form.valueChanges.subscribe((data) => {
+      console.log('data data data');
+      console.log(data);
+    });
+  }
 }
+
