@@ -16,8 +16,9 @@ export class AppComponent {
   constructor(private fb: FormBuilder) {
 
     this.form = this.fb.group({
-      name: new FormControl(''),
-      control:  new FormControl('')
+      name: new FormControl('Adrian'),
+      control:  new FormControl(''),
+      age:  new FormControl('')
     });
 
     this.form.valueChanges.subscribe((data) => {

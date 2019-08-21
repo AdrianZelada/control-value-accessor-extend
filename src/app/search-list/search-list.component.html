@@ -1,7 +1,7 @@
 <div class="content-form">
   <zt-textarea [label]="label" [formControl]="control"></zt-textarea>
   <ul>
-    <li *ngFor="let item of currentOptions" (click)="select(item)">
+    <li *ngFor="let item of currentOptions" (click)="select(item)" [ngClass]="{'selected': selected === item}">
       {{item}}
     </li>
   </ul>

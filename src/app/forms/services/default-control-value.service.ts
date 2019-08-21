@@ -1,12 +1,21 @@
 import { Injectable } from '@angular/core';
-import {AbtractInputComponent} from '../domains/AbtractInputComponent';
+import {AbstractInputComponent} from '../domains/abstract-input-component';
+import {RendererService} from './renderer.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DefaultControlValueService extends AbtractInputComponent {
+export class DefaultControlValueService extends AbstractInputComponent {
 
-  constructor() {
+  constructor(private rendererService: RendererService) {
     super();
+  }
+
+  change(value: any): void {
+    this.onChange(value);
+  }
+
+  writeValue(input: HTMLElement, prop: string, value: any): void {
+    this.rendererService.setProperty(input, prop, value);
   }
 }

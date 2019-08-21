@@ -1,6 +1,7 @@
 import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {AbtractInputComponent} from '../forms/domains/AbtractInputComponent';
+import {AbstractInputComponent} from '../forms/domains/abstract-input-component';
+import {RendererService} from '../forms/services/renderer.service';
 
 @Component({
   selector: 'app-search-list',
@@ -8,17 +9,18 @@ import {AbtractInputComponent} from '../forms/domains/AbtractInputComponent';
   styleUrls: ['./search-list.component.scss'],
   viewProviders: [
     {
-      provide: AbtractInputComponent,
+      provide: AbstractInputComponent,
       useExisting: forwardRef(() => SearchListComponent)
     }
   ]
 })
-export class SearchListComponent extends AbtractInputComponent implements OnInit {
+export class SearchListComponent extends AbstractInputComponent implements OnInit {
 
   @Input() control: FormControl;
   @Input() options: Array<any> = [];
   @Input() label: string;
   currentOptions: Array<any> = [];
+  selected: any;
   constructor() {
     super();
   }
@@ -28,7 +30,6 @@ export class SearchListComponent extends AbtractInputComponent implements OnInit
   }
 
   change(value: any) {
-    console.log('changes')
     if (value != '') {
       this.currentOptions = this.options.filter( (option: string) => {
         return option.search(value) > -1;
@@ -39,7 +40,11 @@ export class SearchListComponent extends AbtractInputComponent implements OnInit
   }
 
   select(item: any) {
-    this.onChange(item);
-    this.writeValue(item);
+    this.selected = this.selected === item ? '' : item;
+    this.onChange(this.selected);
+  }
+
+  writeValue(input: HTMLElement, prop: string, value: any): void {
+    this.selected = value;
   }
 }
