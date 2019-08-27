@@ -1,4 +1,8 @@
+import {Input} from '@angular/core';
+import {FormControl} from '@angular/forms';
+
 export abstract class AbstractInputComponent {
+  @Input() control: FormControl;
   onChange: any;
   onTouched: any;
   valid(): boolean {

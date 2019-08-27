@@ -18,7 +18,8 @@ export class AppComponent {
     this.form = this.fb.group({
       name: new FormControl('Adrian'),
       control:  new FormControl(''),
-      age:  new FormControl('')
+      age:  new FormControl(''),
+      mask:  new FormControl('')
     });
 
     this.form.valueChanges.subscribe((data) => {

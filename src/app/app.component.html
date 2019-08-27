@@ -6,6 +6,8 @@
   <zt-textarea formControlName="control" [label]="'Control'"></zt-textarea>
   <app-search-list [control]="form.controls.name" [options]="options" [label]="'Name'"></app-search-list>
   <app-only-numbers [control]="form.controls.age" [label]="'Age'"></app-only-numbers>
+
+  <mask-input [control]="form.controls.mask" [label]="'Mask'" [mask]="'+(7) 000 000'"></mask-input>
 </div>
 
 <router-outlet></router-outlet>

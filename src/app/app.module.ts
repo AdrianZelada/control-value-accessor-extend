@@ -7,12 +7,14 @@ import {CustomFormsModule} from './forms/forms.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SearchListComponent } from './search-list/search-list.component';
 import { OnlyNumbersComponent } from './only-numbers/only-numbers.component';
+import { MaskInputComponent } from './mask-input/mask-input.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchListComponent,
-    OnlyNumbersComponent
+    OnlyNumbersComponent,
+    MaskInputComponent
   ],
   imports: [
     BrowserModule,

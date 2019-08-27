@@ -16,7 +16,6 @@ import {RendererService} from '../forms/services/renderer.service';
 })
 export class OnlyNumbersComponent extends AbstractInputComponent implements OnInit {
 
-  @Input() control: FormControl;
   @Input() label: string;
   lastValue: string = '';
   private input: HTMLElement;
@@ -27,11 +26,16 @@ export class OnlyNumbersComponent extends AbstractInputComponent implements OnIn
   ngOnInit() {}
 
   change(text: any) {
-    if (this.isNumber(text)) {
+    if (text !== '') {
+      if (this.isNumber(text)) {
+        this.onChange(text);
+        this.lastValue = text;
+      } else {
+        this.renderEL('value', this.lastValue);
+      }
+    } else {
       this.onChange(text);
       this.lastValue = text;
-    } else {
-      this.renderEL('value', this.lastValue);
     }
   }
 

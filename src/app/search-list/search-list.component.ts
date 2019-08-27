@@ -16,7 +16,6 @@ import {RendererService} from '../forms/services/renderer.service';
 })
 export class SearchListComponent extends AbstractInputComponent implements OnInit {
 
-  @Input() control: FormControl;
   @Input() options: Array<any> = [];
   @Input() label: string;
   currentOptions: Array<any> = [];
