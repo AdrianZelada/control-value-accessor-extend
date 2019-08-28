@@ -13,6 +13,7 @@ export class AppComponent {
   form: FormGroup;
 
   options: Array<string> = ['Adrian', 'Chicho', 'Ceci'];
+  mask: string = '+(0) 000 000';
   constructor(private fb: FormBuilder) {
 
     this.form = this.fb.group({

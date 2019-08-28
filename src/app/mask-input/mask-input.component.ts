@@ -25,73 +25,111 @@ export class MaskInputComponent  extends AbstractInputComponent implements OnIni
   @Input() label: string;
   @Input() mask: string;
   lastValue: string = '';
+  mapMask: Array<any> = [];
   private input: HTMLElement;
   constructor( private rendererService: RendererService, private validateCharacterService: ValidationsCharacterService) {
     super();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.mapMask = this.getMapMask();
+  }
 
-  // objMask() {
-  //   return this.mask.split('').map((value) =>{
-  //     return {
-  //       key: value,
-  //       replace: false,
-  //
-  //     }
-  //   });
-  // }
+  getMapMask() {
+    return this.mask.split('').map((key) =>{
+      return {
+        key: key,
+        replace: false,
+        type: this.getTypeData(key),
+        value: ''
+      };
+    });
+  }
 
-  change(text: any) {
+  getTypeData(character: string) {
+    switch (character) {
+      case '0':
+        return 'number';
+        break;
+      case 'a':
+        return 'letter';
+        break;
+      case '_':
+        return 'any';
+        break;
+      default:
+        return 'symbol';
+        break;
+    }
+  }
 
-    console.log('text ===> ', text.length);
-    const lMask = this.mask.length;
-    let maskText = '';
-    let value = '';
-    let indexValue = 0;
-    for (let i = 0; i < lMask; i++) {
-      const character = this.mask.charAt(i);
-      if (this.validateCharacterService.isNumber(character)) {
-        // const
-        // debugger;
-        if (text.length > indexValue && this.validateCharacterService.isNumber(text[indexValue])) {
-          maskText = maskText + text[indexValue];
-          value = value + text[indexValue];
-          // this.lastValue = `${this.lastValue}${text[indexValue]}`;
-          indexValue++;
-        } else {
-          break;
-          // maskText = maskText + character;
+  change(text: string) {
+
+    if (text.length > this.filterReplace().length) {
+      const character = text.charAt(text.length - 1);
+      const l = this.mapMask.length;
+      for (let i = 0; i < l; i++) {
+        const mask: any = this.mapMask[i];
+        if (mask.type === 'number') {
+          if (!mask.replace) {
+            if (this.validateCharacterService.isNumber(character)){
+              mask.value = character;
+              mask.replace = true;
+              break;
+            }
+          }
         }
-      } else {
-        if (this.validateCharacterService.isLetter(character)) {
-          if (text.length > indexValue && this.validateCharacterService.isLetter(text[indexValue])) {
-            maskText = maskText + text[indexValue];
-            value = value + text[indexValue];
-            // this.lastValue = `${this.lastValue}${text[indexValue]}`;
-            indexValue++;
-          } else {
-            // maskText = maskText + character;
+
+        if (mask.type === 'letter') {
+          if (!mask.replace) {
+            if (this.validateCharacterService.isLetter(character)) {
+              mask.value = character;
+              mask.replace = true;
+              break;
+            }
+          }
+        }
+
+        if (mask.type === 'any') {
+          if (!mask.replace) {
+            mask.value = character;
+            mask.replace = true;
             break;
           }
-        } else {
-          // console.log(`asdfadf${character}adfasdfasf`);
-          maskText = maskText + character;
-          indexValue++;
+        }
 
+        if (mask.type === 'symbol') {
+          mask.value = mask.key;
+          mask.replace = true;
         }
       }
+    } else {
+      const textArray = text.split('');
+      this.mapMask.forEach((mask: any, index: number) => {
+        if (textArray.length - 1 < index) {
+          mask.replace = false;
+          mask.value = '';
+        }
+      });
     }
 
+    let valuesForm = '';
+    const maskText = this.filterReplace()
+      .map( (mask: any) => {
+      if (mask.type !== 'symbol') {
+        valuesForm = valuesForm + mask.value;
+      }
+      return mask.value;
+    }).join('');
 
-
-
-
-    console.log('maskText ===> ', maskText);
     this.renderEL('value', maskText);
-    console.log('last  Value ===> ', value);
-    this.onChange(value);
+    this.onChange(valuesForm);
+  }
 
+  filterReplace() {
+    return this.mapMask.filter((mask: any) => {
+      return mask.replace;
+    });
   }
 
   writeValue(input: HTMLElement, prop: string, value: any): void {
@@ -102,10 +140,5 @@ export class MaskInputComponent  extends AbstractInputComponent implements OnIni
 
   renderEL(prop: string, value: string) {
     this.rendererService.setProperty(this.input, prop, value);
-  }
-
-  isNumber(n: any) {
-    const pattern = /^\d+$/;
-    return pattern.test(n);
   }
 }
