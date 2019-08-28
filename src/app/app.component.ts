@@ -8,8 +8,6 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 })
 
 export class AppComponent {
-  title = 'control-value-accesor-extend';
-
   form: FormGroup;
 
   options: Array<string> = ['Adrian', 'Chicho', 'Ceci'];
