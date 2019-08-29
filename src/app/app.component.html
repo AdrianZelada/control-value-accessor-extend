@@ -4,7 +4,7 @@
   <h3>Normal</h3>
   <zt-textarea formControlName="control" [label]="'Control'"></zt-textarea>
   <h3>Search List</h3>
-  <app-search-list [control]="form.controls.name" [options]="options" [label]="'Name'"></app-search-list>
+  <app-search-list [control]="form.controls.name" [options]="options" [label]="'Name'" [keyLabel]="'name'"></app-search-list>
   <h3>Only numbers</h3>
   <app-only-numbers [control]="form.controls.age" [label]="'Age'"></app-only-numbers>
   <h3>Mask : {{mask}}</h3>

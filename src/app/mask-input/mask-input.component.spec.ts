@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MaskInputComponent } from './mask-input.component';
+import {TextareaComponent} from '../forms/textarea/textarea.component';
 
 describe('MaskInputComponent', () => {
   let component: MaskInputComponent;
@@ -8,7 +9,7 @@ describe('MaskInputComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MaskInputComponent ]
+      declarations: [ MaskInputComponent, TextareaComponent]
     })
     .compileComponents();
   }));

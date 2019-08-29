@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnInit, Optional, Renderer2, ViewChild} from '@angular/core';
+import {Component, forwardRef, Input, Optional, ViewChild} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {DefaultControlValueService} from '../services/default-control-value.service';
 import {AbstractInputComponent} from '../domains/abstract-input-component';
@@ -12,7 +12,7 @@ export const EPANDED_TEXTAREA_VALUE_ACCESSOR : any = {
   selector: 'zt-textarea',
   providers: [EPANDED_TEXTAREA_VALUE_ACCESSOR, DefaultControlValueService],
   templateUrl: './textarea.component.html',
-  styleUrls: ['./textarea.component.sass']
+  styleUrls: ['./textarea.component.scss']
 })
 export class TextareaComponent implements ControlValueAccessor {
   @ViewChild('textarea') textarea;

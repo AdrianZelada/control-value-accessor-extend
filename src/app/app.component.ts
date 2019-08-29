@@ -10,12 +10,15 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 export class AppComponent {
   form: FormGroup;
 
-  options: Array<string> = ['Adrian', 'Chicho', 'Ceci'];
+  options: Array<any> = [
+    {name: 'Adrian', value: 1 },
+    {name: 'Chicho', value: 2 },
+    {name: 'Ceci', value: 3 }];
   mask: string = '+(0) 000 000';
   constructor(private fb: FormBuilder) {
 
     this.form = this.fb.group({
-      name: new FormControl('Adrian'),
+      name: new FormControl(2),
       control:  new FormControl(''),
       age:  new FormControl(''),
       mask:  new FormControl('')

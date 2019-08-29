@@ -6,7 +6,7 @@ import {RendererService} from '../forms/services/renderer.service';
 @Component({
   selector: 'app-only-numbers',
   templateUrl: './only-numbers.component.html',
-  styleUrls: ['./only-numbers.component.sass'],
+  styleUrls: ['./only-numbers.component.scss'],
   viewProviders: [
     {
       provide: AbstractInputComponent,

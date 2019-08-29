@@ -1,6 +1,12 @@
 <label> {{label}}</label>
-<input contenteditable="true"
-       #textarea
-       tabindex="1"
-       (input)="changeInput($event)"
-       role="textarea"/>
+<!--<input contenteditable="true"-->
+       <!--#textarea-->
+       <!--tabindex="1"-->
+       <!--(input)="changeInput($event)"-->
+       <!--role="textarea"/>-->
+<textarea contenteditable="true"
+        #textarea
+        tabindex="1"
+        rows="1"
+        (input)="changeInput($event)"
+        role="textarea"></textarea>

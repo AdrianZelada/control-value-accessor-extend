@@ -5,9 +5,6 @@ export abstract class AbstractInputComponent {
   @Input() control: FormControl;
   onChange: any;
   onTouched: any;
-  valid(): boolean {
-    return true;
-  }
   registerChange(fn: void) {
     this.onChange = fn;
   }

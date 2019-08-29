@@ -12,7 +12,7 @@ import {ValidationsCharacterService} from '../services/validations-character.ser
 @Component({
   selector: 'mask-input',
   templateUrl: './mask-input.component.html',
-  styleUrls: ['./mask-input.component.sass'],
+  styleUrls: ['./mask-input.component.scss'],
   viewProviders: [
     {
       provide: AbstractInputComponent,

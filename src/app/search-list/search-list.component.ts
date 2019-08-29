@@ -1,7 +1,5 @@
 import {Component, forwardRef, Input, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
 import {AbstractInputComponent} from '../forms/domains/abstract-input-component';
-import {RendererService} from '../forms/services/renderer.service';
 
 @Component({
   selector: 'app-search-list',
@@ -18,6 +16,8 @@ export class SearchListComponent extends AbstractInputComponent implements OnIni
 
   @Input() options: Array<any> = [];
   @Input() label: string;
+  @Input() keyLabel: string = 'label';
+  @Input() keyValue: string = 'value';
   currentOptions: Array<any> = [];
   selected: any;
   constructor() {
@@ -30,8 +30,8 @@ export class SearchListComponent extends AbstractInputComponent implements OnIni
 
   change(value: any) {
     if (value != '') {
-      this.currentOptions = this.options.filter( (option: string) => {
-        return option.search(value) > -1;
+      this.currentOptions = this.options.filter( (option: any) => {
+        return option[this.keyLabel].search(value) > -1;
       });
     } else {
       this.currentOptions = this.options;
@@ -39,7 +39,7 @@ export class SearchListComponent extends AbstractInputComponent implements OnIni
   }
 
   select(item: any) {
-    this.selected = this.selected === item ? '' : item;
+    this.selected = this.selected === item[this.keyValue] ? null : item[this.keyValue];
     this.onChange(this.selected);
   }
 
